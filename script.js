@@ -1,5 +1,5 @@
 function genText() {
-  const content = tategaki(document.getElementById('content').value, false);
+  const content = tategaki(document.getElementById('content').value, "text");
   document.getElementById('output').value = content;
 
   const tempInput = document.createElement('input');
@@ -10,7 +10,18 @@ function genText() {
 }
 
 function genHTML() {
-  const content = tategaki(document.getElementById('content').value, true);
+  const content = tategaki(document.getElementById('content').value, "html");
+  document.getElementById('output').value = content;
+
+  const tempInput = document.createElement('input');
+  tempInput.value = content;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.body.removeChild(tempInput);
+}
+
+function genScript() {
+  const content = tategaki(document.getElementById('content').value, "script");
   document.getElementById('output').value = content;
 
   const tempInput = document.createElement('input');
@@ -23,9 +34,10 @@ function genHTML() {
 function tategaki(content, type) {
   const splitedContent = convertTo2DArray(content);
   let result;
+
+  if (type === "text") result = reconstructForText(splitedContent);
   if (type === "html") result = reconstructForHTML(splitedContent);
   if (type === "script") result = reconstructForScript(splitedContent);
-  if (type === "text") result = reconstructForText(splitedContent);
 
   return result;
 }
