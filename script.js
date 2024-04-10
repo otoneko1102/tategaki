@@ -27,6 +27,13 @@ function tategaki(content, html) {
   return result;
 }
 
+function copyText() {
+  var textArea = document.getElementById("myTextArea");
+  textArea.select();
+  document.execCommand("copy");
+  alert("クリップボードにコピーしました！");
+}
+
 function convertTo2DArray(content) {
   const lines = content.split('\n');
   const maxLength = Math.max(...lines.map(line => line.length));
