@@ -1,12 +1,5 @@
-window.addEventListener('load', function() {
-  document.getElementById('generateButton').addEventListener('click', function() {
-    gen();
-  });
-});
-
-function gen() {
-  const mode = document.getElementById('copyType').value;
-  const content = tategaki(document.getElementById('content').value, mode);
+function genText() {
+  const content = tategaki(document.getElementById('content').value, false);
   document.getElementById('output').value = content;
 
   const tempInput = document.createElement('input');
@@ -16,9 +9,20 @@ function gen() {
   document.body.removeChild(tempInput);
 }
 
-function tategaki(content, mode) {
+function genHTML() {
+  const content = tategaki(document.getElementById('content').value, true);
+  document.getElementById('output').value = content;
+
+  const tempInput = document.createElement('input');
+  tempInput.value = content;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.body.removeChild(tempInput);
+}
+
+function tategaki(content, html) {
   const splitedContent = convertTo2DArray(content);
-  const result = reconstructText(splitedContent, mode);
+  const result = html ? reconstructForHTML(splitedContent) : reconstructForText(splitedContent);
 
   return result;
 }
@@ -39,7 +43,7 @@ function convertTo2DArray(content) {
   return result;
 }
 
-function reconstructText(array, mode) {
+function reconstructForHTML(array) {
   let reconstructedText = '';
 
   for (let i = 0; i < array[0].length; i++) {
@@ -48,7 +52,22 @@ function reconstructText(array, mode) {
         reconstructedText += checkWidth(array[j][i]) ? array[j][i] : `${array[j][i]} `;
       }
     }
-    reconstructedText += mode === 'html' ? '<br>' : '\n';
+    reconstructedText += '<br>';
+  }
+  
+  return reconstructedText;
+}
+
+function reconstructForText(array) {
+  let reconstructedText = '';
+
+  for (let i = 0; i < array[0].length; i++) {
+    for (let j = 0; j < array.length; j++) {
+      if (array[j][i] !== undefined) {
+        reconstructedText += checkWidth(array[j][i]) ? array[j][i] : `${array[j][i]} `;
+      }
+    }
+    reconstructedText += '\n';
   }
   
   return reconstructedText;
