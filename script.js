@@ -28,7 +28,7 @@ function tategaki(content, html) {
 }
 
 function copyText() {
-  var textArea = document.getElementById("myTextArea");
+  var textArea = document.getElementById("input");
   textArea.select();
   document.execCommand("copy");
   alert("クリップボードにコピーしました！");
