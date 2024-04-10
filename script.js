@@ -5,7 +5,7 @@ window.addEventListener('load', function() {
 });
 
 function gen() {
-  const mode = document.getElementById('copType').value;
+  const mode = document.getElementById('copyType').value;
   const content = tategaki(document.getElementById('content').value, mode);
   document.getElementById('output').value = content;
 
