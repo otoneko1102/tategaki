@@ -20,9 +20,12 @@ function genHTML() {
   document.body.removeChild(tempInput);
 }
 
-function tategaki(content, html) {
+function tategaki(content, type) {
   const splitedContent = convertTo2DArray(content);
-  const result = html ? reconstructForHTML(splitedContent) : reconstructForText(splitedContent);
+  let result;
+  if (type === "html") result = reconstructForHTML(splitedContent);
+  if (type === "script") result = reconstructForScript(splitedContent);
+  if (type === "text") result = reconstructForText(splitedContent);
 
   return result;
 }
@@ -60,6 +63,21 @@ function reconstructForHTML(array) {
       }
     }
     reconstructedText += '<br>\n';
+  }
+  
+  return reconstructedText;
+}
+
+function reconstructForScript(array) {
+  let reconstructedText = '';
+
+  for (let i = 0; i < array[0].length; i++) {
+    for (let j = 0; j < array.length; j++) {
+      if (array[j][i] !== undefined) {
+        reconstructedText += checkWidth(array[j][i]) ? array[j][i] : `${array[j][i]} `;
+      }
+    }
+    reconstructedText += '\\n';
   }
   
   return reconstructedText;
