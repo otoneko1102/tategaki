@@ -27,10 +27,14 @@ function tategaki(content) {
 
 function convertTo2DArray(content) {
   const lines = content.split('\n');
+  const maxLength = Math.max(...lines.map(line => line.length));
   const result = [];
 
   lines.forEach(line => {
     const characters = line.split('');
+    while (characters.length < maxLength) {
+      characters.push('　');
+    }
     result.push(characters);
   });
 
