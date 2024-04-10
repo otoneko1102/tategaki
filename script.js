@@ -52,7 +52,7 @@ function reconstructForHTML(array) {
         reconstructedText += checkWidth(array[j][i]) ? array[j][i] : `${array[j][i]} `;
       }
     }
-    reconstructedText += '<br>';
+    reconstructedText += '<br>\n';
   }
   
   return reconstructedText;
