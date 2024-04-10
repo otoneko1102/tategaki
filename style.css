@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h3 {
+  text-align: center;
+}
+
+form {
+  margin: 20px auto;
+  text-align: center;
+}
+
+label {
+  display: block;
+}
+
+textarea {
+  width: 90%;
+  padding: 10px;
+  margin: 5px auto;
+  resize: vertical;
+}
+
+button.gen {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button.gen:hover {
+  background-color: #45a049;
+}
+
+#output {
+  width: 90%;
+  margin: 20px auto;
+  padding: 10px;
+  resize: vertical;
+}
+
+@media only screen and (min-width: 600px) {
+  /* Adjustments for larger screens */
+  form {
+    width: 50%;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  #output {
+    width: 80%;
+  }
+}
