@@ -1,20 +1,22 @@
 # tategaki
 横書きの文章を擬似的に縦書きに変換します。
 
-これはtestです。
+```
+これはtestです
 このように
-変換されます。
-
-ここ変<br>
-れの換<br>
-はよさ<br>
-t うれ<br>
-e にま<br>
-s 　す<br>
-t 　。<br>
-で　　<br>
-す　　<br>
-。　　<br>
+変換されます
+```
+```
+変ここ<br>
+換のれ<br>
+さよは<br>
+れうｔ<br>
+まにｅ<br>
+す　ｓ<br>
+　　ｔ<br>
+　　で<br>
+　　す<br>
+```
 
 https://otoneko1102.github.io/tategaki/
 
