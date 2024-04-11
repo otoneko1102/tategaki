@@ -4,10 +4,10 @@ https://otoneko1102.github.io/tategaki/
 
 | Features | ✅/❌ |
 | --- | :---: |
-| Vertical writing | ✅ |
-| For HTML | ✅ |
-| For script | ✅ |
-| Copy to clipboard | ✅ |
-| Web app (iOS) | ✅ |
-| Preventing display distortion <br>due to half-width characters | ✅ |
-| Preventing display distortion <br>due to special characters | ❌ |
+| 縦書きに変換 (テキスト) | ✅ |
+| 縦書きに変換 (HTML) | ✅ |
+| 縦書きに変換 (Script) | ✅ |
+| クリップボードにコピー | ✅ |
+| ウェブアプリ (iOS) | ✅ |
+| 半角文字による表示の崩れの防止 | ✅ |
+| 特殊文字による表示の崩れの防止 | ❌ |
