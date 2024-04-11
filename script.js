@@ -83,7 +83,7 @@ function reconstructForHTML(array) {
   let reconstructedText = '';
 
   for (let i = 0; i < array[0].length; i++) {
-    for (let j = 0; j < array.length; j++) {
+    for (let j = array.length - 1; j >= 0; j--) {
       if (array[j][i] !== undefined) {
         reconstructedText += checkWidth(array[j][i]) ? array[j][i] : `${array[j][i]} `;
       }
@@ -98,7 +98,7 @@ function reconstructForScript(array) {
   let reconstructedText = '';
 
   for (let i = 0; i < array[0].length; i++) {
-    for (let j = 0; j < array.length; j++) {
+    for (let j = array.length - 1; j >= 0; j--) {
       if (array[j][i] !== undefined) {
         reconstructedText += checkWidth(array[j][i]) ? array[j][i] : `${array[j][i]} `;
       }
@@ -113,7 +113,7 @@ function reconstructForText(array) {
   let reconstructedText = '';
 
   for (let i = 0; i < array[0].length; i++) {
-    for (let j = 0; j < array.length; j++) {
+    for (let j = array.length - 1; j >= 0; j--) {
       if (array[j][i] !== undefined) {
         reconstructedText += checkWidth(array[j][i]) ? array[j][i] : `${array[j][i]} `;
       }
