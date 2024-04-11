@@ -1,27 +1,28 @@
 const replaceChars = {
-	"（": "︵",
-	"）": "︶",
-	"「": "﹁",
-	"」": "﹂",
-	"『": "﹃",
-	"』": "﹄",
-	"〈": "︿",
-	"〉": "﹀",
-	"《": "︽",
-	"》": "︾",
-	"｛": "︷",
-	"｝", "︸",
-	"［": "﹇",
-	"］": "﹈",
-	"【": "︻",
-	"】": "︼",
-	"〖": "︗",
-	"〗": "︘",
-	"❲": "︹",
-	"❳": "︺",
-	"〔": "︹",
-	"〕": "︺"
-}
+  "（": "︵",
+  "）": "︶",
+  "「": "﹁",
+  "」": "﹂",
+  "『": "﹃",
+  "』": "﹄",
+  "〈": "︿",
+  "〉": "﹀",
+  "《": "︽",
+  "》": "︾",
+  "｛": "︷",
+  "｝": "︸",
+  "［": "﹇",
+  "］": "﹈",
+  "【": "︻",
+  "】": "︼",
+  "〖": "︗",
+  "〗": "︘",
+  "❲": "︹",
+  "❳": "︺",
+  "〔": "︹",
+  "〕": "︺"
+};
+
 
 function genText() {
   const content = tategaki(document.getElementById('content').value, "text");
@@ -57,8 +58,9 @@ function genScript() {
 }
 
 function tategaki(content, type) {
-  const convertedContent = replaceMultiple(halfWidthToFullWidth(content), replaceChars);
-  const splitedContent = convertTo2DArray(convertedContent);
+	const convertedContent = halfWidthToFullWidth(content);
+	const replacedContent = replaceMultiple(convertedContent, replaceChars);
+  const splitedContent = convertTo2DArray(replacedContent);
   let result;
 
   if (type === "text") result = reconstructForText(splitedContent);
@@ -106,7 +108,7 @@ function halfWidthToFullWidth(str) {
 
 function replaceMultiple(str, replacements) {
 	let result = str;
-	for (var pattern in replacements) {
+	for (let pattern in replacements) {
     if (replacements.hasOwnProperty(pattern)) {
       result = result.replace(new RegExp(pattern, 'g'), replacements[pattern]);
     }
