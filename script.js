@@ -24,7 +24,6 @@ const replaceChars = {
 	"¥": "￥"
 };
 
-
 function genText() {
   const content = tategaki(document.getElementById('content').value, "text");
   document.getElementById('output').value = content;
