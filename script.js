@@ -32,7 +32,8 @@ function genScript() {
 }
 
 function tategaki(content, type) {
-  const splitedContent = convertTo2DArray(content);
+  const convertedContent = halfWidthToFullWidth(content);
+  const splitedContent = convertTo2DArray(convertedContent);
   let result;
 
   if (type === "text") result = reconstructForText(splitedContent);
@@ -62,6 +63,19 @@ function convertTo2DArray(content) {
     result.push(characters);
   });
 
+  return result;
+}
+
+function halfWidthToFullWidth(str) {
+  let result = '';
+  for (let i = 0; i < str.length; i++) {
+    let charCode = str.charCodeAt(i);
+    if (charCode >= 0x20 && charCode <= 0x7E) {
+      result += String.fromCharCode(charCode + 0xFEE0);
+    } else {
+      result += str.charAt(i);
+    }
+  }
   return result;
 }
 
