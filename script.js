@@ -1,3 +1,28 @@
+const replaceChars = {
+	"（": "︵",
+	"）": "︶",
+	"「": "﹁",
+	"」": "﹂",
+	"『": "﹃",
+	"』": "﹄",
+	"〈": "︿",
+	"〉": "﹀",
+	"《": "︽",
+	"》": "︾",
+	"｛": "︷",
+	"｝", "︸",
+	"［": "﹇",
+	"］": "﹈",
+	"【": "︻",
+	"】": "︼",
+	"〖": "︗",
+	"〗": "︘",
+	"❲": "︹",
+	"❳": "︺",
+	"〔": "︹",
+	"〕": "︺"
+}
+
 function genText() {
   const content = tategaki(document.getElementById('content').value, "text");
   document.getElementById('output').value = content;
@@ -32,7 +57,7 @@ function genScript() {
 }
 
 function tategaki(content, type) {
-  const convertedContent = halfWidthToFullWidth(content);
+  const convertedContent = replaceMultiple(halfWidthToFullWidth(content), replaceChars);
   const splitedContent = convertTo2DArray(convertedContent);
   let result;
 
@@ -74,6 +99,16 @@ function halfWidthToFullWidth(str) {
       result += String.fromCharCode(charCode + 0xFEE0);
     } else {
       result += str.charAt(i);
+    }
+  }
+  return result;
+}
+
+function replaceMultiple(str, replacements) {
+	let result = str;
+	for (var pattern in replacements) {
+    if (replacements.hasOwnProperty(pattern)) {
+      result = result.replace(new RegExp(pattern, 'g'), replacements[pattern]);
     }
   }
   return result;
