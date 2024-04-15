@@ -51,10 +51,10 @@ function genScript() {
   document.body.removeChild(tempInput);
 }
 function tategaki(content, type) {
-	//muddy
+	
   const D_MUD = 'ガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポヴヷヺ';
   const S_MUD = 'ｶﾞｷﾞｸﾞｹﾞｺﾞｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟｳﾞﾜﾞｦﾞ';
-  //kiyone
+	
   const D_KIY = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ'
 		           +'マミムメモヤユヨラリルレロワヲンァィゥェォッャュョー・';
   const S_KIY = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝｧｨｩｪｫｯｬｭｮｰ･';
@@ -67,9 +67,11 @@ function tategaki(content, type) {
     }
     return str;
 	};
+	
+	
 	const convertedContent = halfWidthToFullWidth(toZenKata(content));
 	const replacedContent = replaceMultiple(convertedContent, replaceChars);
-  const splitedContent = convertTo2DArray(replacedContent);
+	const splitedContent = convertTo2DArray(replacedContent);
   let result;
   if (type === "text") result = reconstructForText(splitedContent);
   if (type === "html") result = reconstructForHTML(splitedContent);
