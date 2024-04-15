@@ -51,8 +51,24 @@ function genScript() {
   document.body.removeChild(tempInput);
 }
 function tategaki(content, type) {
+	//muddy
+  const D_MUD = 'ガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポヴヷヺ';
+  const S_MUD = 'ｶﾞｷﾞｸﾞｹﾞｺﾞｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟｳﾞﾜﾞｦﾞ';
+  //kiyone
+  const D_KIY = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ'
+		           +'マミムメモヤユヨラリルレロワヲンァィゥェォッャュョー・';
+  const S_KIY = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝｧｨｩｪｫｯｬｭｮｰ･';
+	const toZenKata = str => {
+    for (let i=0,len=D_MUD.length; i<len; i++) {
+        str = str.split( S_MUD.slice(i*2, i*2+2) ).join( D_MUD.slice(i, i+1) );
+    }
+    for (let i=0,len=D_KIY.length; i<len; i++) {
+        str = str.split( S_KIY.slice(i, i+1) ).join( D_KIY.slice(i, i+1) );
+    }
+    return str;
+	};
 	const convertedContent = halfWidthToFullWidth(content);
-	const convertedJapaneseContent = halfWidthToFullWidth(convertedContent)
+	const convertedJapaneseContent = toZenKata(convertedContent);
 	const replacedContent = replaceMultiple(convertedJapaneseContent, replaceChars);
   const splitedContent = convertTo2DArray(replacedContent);
   let result;
