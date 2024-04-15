@@ -67,9 +67,8 @@ function tategaki(content, type) {
     }
     return str;
 	};
-	const convertedContent = halfWidthToFullWidth(content);
-	const convertedJapaneseContent = toZenKata(convertedContent);
-	const replacedContent = replaceMultiple(convertedJapaneseContent, replaceChars);
+	const convertedContent = halfWidthToFullWidth(toZenKata(content));
+	const replacedContent = replaceMultiple(convertedContent, replaceChars);
   const splitedContent = convertTo2DArray(replacedContent);
   let result;
   if (type === "text") result = reconstructForText(splitedContent);
