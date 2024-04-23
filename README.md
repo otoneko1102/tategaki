@@ -1,6 +1,6 @@
 # tategaki
 横書きの文章を擬似的に縦書きに変換します。<br>
-https://otoneko1102.github.io/tategaki/
+https://tategaki.otoneko.jp/
 | Features | ✅/❌ |
 | --- | :---: |
 | 縦書きに変換 (Text) | ✅ |
