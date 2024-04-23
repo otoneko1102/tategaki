@@ -3,13 +3,13 @@
   "name": "Tategaki",
   "short_name": "Tategaki",
   "description": "Convert to vertical writing.",
-  "start_url": "/tategaki/",
+  "start_url": ".",
   "orientation": "any",
   "display": "standalone",
   "version": "1.0.0",
   "icons": [
     {
-      "src": "https://otoneko1102.github.io/tategaki/img/icon.jpg",
+      "src": "https://tategaki.otoneko.jp/img/icon.jpg",
       "sizes": "2048x2048"
     }
   ]
