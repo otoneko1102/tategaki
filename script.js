@@ -77,7 +77,7 @@ function tategaki(content, type) {
   if (type === "text") result = reconstructForText(splitedContent);
   if (type === "html") result = reconstructForHTML(splitedContent);
   if (type === "script") result = reconstructForScript(splitedContent);
-  return result.replace(/。/g, ' ｡').replace(/、/g, ' ､');
+  return result;
 }
 function copyText() {
   var textArea = document.getElementById("output");
