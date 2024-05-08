@@ -86,12 +86,17 @@ function copyText() {
   document.execCommand("copy");
   alert("クリップボードにコピーしました！");
 }
-function fixLines(content, count) {
+
+function fixLines(content, charCount) {
   const result = [];
+  const count = parseInt(charCount);
+  if (count === 0) return content;
   for (let i = 0; i < content.length; i += count) {
     result.push(content.slice(i, i + count));
+    result.push('\n');
   }
-  return result.join('\n');
+  result.pop();
+  return result.join('');
 }
 
 function convertTo2DArray(content) {
