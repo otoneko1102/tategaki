@@ -72,7 +72,8 @@ function tategaki(content, type) {
 
   const convertedContent = halfWidthToFullWidth(toZenKata(content));
   const replacedContent = replaceMultiple(convertedContent, replaceChars);
-  const splitedContent = convertTo2DArray(replacedContent);
+  const fixedContent = fixLines(replacedContent, document.getElementById("count")?.value || 0)
+  const splitedContent = convertTo2DArray(fixedContent);
   let result;
   if (type === "text") result = reconstructForText(splitedContent);
   if (type === "html") result = reconstructForHTML(splitedContent);
@@ -85,6 +86,14 @@ function copyText() {
   document.execCommand("copy");
   alert("クリップボードにコピーしました！");
 }
+function fixLines(content, count) {
+  const result = [];
+  for (let i = 0; i < content.length; i += count) {
+    result.push(content.slice(i, i + count));
+  }
+  return result.join('\n');
+}
+
 function convertTo2DArray(content) {
   const lines = content.split("\n");
   const maxLength = Math.max(...lines.map((line) => line.length));
