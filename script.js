@@ -88,9 +88,10 @@ function copyText() {
 }
 
 function fixLines(content, charCount) {
+  if (!content) return null;
   const result = [];
   const count = parseInt(charCount);
-  if (count === 0) return content;
+  if (isNaN(count) || count === 0) return content;
   for (let i = 0; i < content.length; i += count) {
     result.push(content.slice(i, i + count));
     result.push('\n');
