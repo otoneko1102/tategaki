@@ -134,7 +134,7 @@ function replaceMultiple(str, replacements) {
   }
   return result;
 }
-function reconstructForHTML(array) {
+function reconstructForHTML(array, spaces) {
   let reconstructedText = "";
   for (let i = 0; i < array[0].length; i++) {
     for (let j = array.length - 1; j >= 0; j--) {
@@ -148,7 +148,7 @@ function reconstructForHTML(array) {
   }
   return reconstructedText;
 }
-function reconstructForScript(array) {
+function reconstructForScript(array, spaces) {
   let reconstructedText = "";
   for (let i = 0; i < array[0].length; i++) {
     for (let j = array.length - 1; j >= 0; j--) {
