@@ -75,9 +75,9 @@ function tategaki(content, type) {
   const fixedContent = fixLines(replacedContent, document.getElementById("count")?.value || 0)
   const splitedContent = convertTo2DArray(fixedContent);
   let result;
-  if (type === "text") result = reconstructForText(splitedContent);
-  if (type === "html") result = reconstructForHTML(splitedContent);
-  if (type === "script") result = reconstructForScript(splitedContent);
+  if (type === "text") result = reconstructForText(splitedContent, parseInt(document.getElementById("spaces")?.value) || 0);
+  if (type === "html") result = reconstructForHTML(splitedContent, parseInt(document.getElementById("spaces")?.value) || 0);
+  if (type === "script") result = reconstructForScript(splitedContent, parseInt(document.getElementById("spaces")?.value) || 0);
   return result;
 }
 function copyText() {
@@ -140,8 +140,8 @@ function reconstructForHTML(array) {
     for (let j = array.length - 1; j >= 0; j--) {
       if (array[j][i] !== undefined) {
         reconstructedText += checkWidth(array[j][i])
-          ? array[j][i]
-          : `${array[j][i]} `;
+          ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
+          : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
       }
     }
     reconstructedText += "<br>\n";
@@ -154,22 +154,22 @@ function reconstructForScript(array) {
     for (let j = array.length - 1; j >= 0; j--) {
       if (array[j][i] !== undefined) {
         reconstructedText += checkWidth(array[j][i])
-          ? array[j][i]
-          : `${array[j][i]} `;
+          ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
+          : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
       }
     }
     reconstructedText += "\\n";
   }
   return reconstructedText;
 }
-function reconstructForText(array) {
+function reconstructForText(array, spaces) {
   let reconstructedText = "";
   for (let i = 0; i < array[0].length; i++) {
     for (let j = array.length - 1; j >= 0; j--) {
       if (array[j][i] !== undefined) {
         reconstructedText += checkWidth(array[j][i])
-          ? array[j][i]
-          : `${array[j][i]} `;
+          ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
+          : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
       }
     }
     reconstructedText += "\n";
