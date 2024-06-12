@@ -23,33 +23,35 @@ const replaceChars = {
   "〔": "︹",
   "〕": "︺",
 };
+
 function genText() {
   const content = tategaki(document.getElementById("content").value, "text");
   document.getElementById("output").value = content;
-  const tempInput = document.createElement("input");
-  tempInput.value = content;
-  document.body.appendChild(tempInput);
-  tempInput.select();
-  document.body.removeChild(tempInput);
+  //copyToClipboard(content);
 }
+
 function genHTML() {
   const content = tategaki(document.getElementById("content").value, "html");
   document.getElementById("output").value = content;
-  const tempInput = document.createElement("input");
-  tempInput.value = content;
-  document.body.appendChild(tempInput);
-  tempInput.select();
-  document.body.removeChild(tempInput);
+  //copyToClipboard(content);
 }
+
 function genScript() {
   const content = tategaki(document.getElementById("content").value, "script");
   document.getElementById("output").value = content;
+  //copyToClipboard(content);
+}
+
+function copyToClipboard(content) {
   const tempInput = document.createElement("input");
   tempInput.value = content;
   document.body.appendChild(tempInput);
   tempInput.select();
+  document.execCommand("copy");
   document.body.removeChild(tempInput);
+  alert("クリップボードにコピーしました！");
 }
+
 function tategaki(content, type) {
   const D_MUD = "ガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポヴヷヺ";
   const S_MUD = "ｶﾞｷﾞｸﾞｹﾞｺﾞｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾞﾁﾞﾂﾞﾃﾞﾄﾞﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟｳﾞﾜﾞｦﾞ";
@@ -57,7 +59,7 @@ function tategaki(content, type) {
   const D_KIY =
     "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ" +
     "マミムメモヤユヨラリルレロワヲンァィゥェォッャュョー・";
-  const S_KIY = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝｧｨｩｪｫｯｬｭｮｰ･";
+  const S_KIY = "ｱｲｳｴｵｶｷｸｹｺｻﾞｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝｧｨｩｪｫｯｬｭｮｰ･";
   const toZenKata = (str) => {
     for (let i = 0, len = D_MUD.length; i < len; i++) {
       str = str
@@ -74,17 +76,12 @@ function tategaki(content, type) {
   const replacedContent = replaceMultiple(convertedContent, replaceChars);
   const fixedContent = fixLines(replacedContent, document.getElementById("count")?.value || 0)
   const splitedContent = convertTo2DArray(fixedContent);
+  const direction = document.getElementById("direction").value;
   let result;
-  if (type === "text") result = reconstructForText(splitedContent, parseInt(document.getElementById("spaces")?.value) || 0);
-  if (type === "html") result = reconstructForHTML(splitedContent, parseInt(document.getElementById("spaces")?.value) || 0);
-  if (type === "script") result = reconstructForScript(splitedContent, parseInt(document.getElementById("spaces")?.value) || 0);
+  if (type === "text") result = reconstructForText(splitedContent, parseInt(document.getElementById("spaces")?.value) || 0, direction);
+  if (type === "html") result = reconstructForHTML(splitedContent, parseInt(document.getElementById("spaces")?.value) || 0, direction);
+  if (type === "script") result = reconstructForScript(splitedContent, parseInt(document.getElementById("spaces")?.value) || 0, direction);
   return result;
-}
-function copyText() {
-  var textArea = document.getElementById("output");
-  textArea.select();
-  document.execCommand("copy");
-  alert("クリップボードにコピーしました！");
 }
 
 function fixLines(content, charCount) {
@@ -113,6 +110,7 @@ function convertTo2DArray(content) {
   });
   return result;
 }
+
 function halfWidthToFullWidth(str) {
   let result = "";
   for (let i = 0; i < str.length; i++) {
@@ -125,6 +123,7 @@ function halfWidthToFullWidth(str) {
   }
   return result;
 }
+
 function replaceMultiple(str, replacements) {
   let result = str;
   for (let pattern in replacements) {
@@ -134,48 +133,91 @@ function replaceMultiple(str, replacements) {
   }
   return result;
 }
-function reconstructForHTML(array, spaces) {
+
+function reconstructForHTML(array, spaces, direction) {
   let reconstructedText = "";
-  for (let i = 0; i < array[0].length; i++) {
-    for (let j = array.length - 1; j >= 0; j--) {
-      if (array[j][i] !== undefined) {
-        reconstructedText += checkWidth(array[j][i])
-          ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
-          : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
+  if (direction === "rtl") {
+    for (let i = 0; i < array[0].length; i++) {
+      for (let j = array.length - 1; j >= 0; j--) {
+        if (array[j][i] !== undefined) {
+          reconstructedText += checkWidth(array[j][i])
+            ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
+            : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
+        }
       }
+      reconstructedText += "<br>\n";
     }
-    reconstructedText += "<br>\n";
+  } else {
+    for (let i = 0; i < array[0].length; i++) {
+      for (let j = 0; j < array.length; j++) {
+        if (array[j][i] !== undefined) {
+          reconstructedText += checkWidth(array[j][i])
+            ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
+            : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
+        }
+      }
+      reconstructedText += "<br>\n";
+    }
   }
   return reconstructedText;
 }
-function reconstructForScript(array, spaces) {
+
+function reconstructForScript(array, spaces, direction) {
   let reconstructedText = "";
-  for (let i = 0; i < array[0].length; i++) {
-    for (let j = array.length - 1; j >= 0; j--) {
-      if (array[j][i] !== undefined) {
-        reconstructedText += checkWidth(array[j][i])
-          ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
-          : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
+  if (direction === "rtl") {
+    for (let i = 0; i < array[0].length; i++) {
+      for (let j = array.length - 1; j >= 0; j--) {
+        if (array[j][i] !== undefined) {
+          reconstructedText += checkWidth(array[j][i])
+            ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
+            : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
+        }
       }
+      reconstructedText += "\\n";
     }
-    reconstructedText += "\\n";
+  } else {
+    for (let i = 0; i < array[0].length; i++) {
+      for (let j = 0; j < array.length; j++) {
+        if (array[j][i] !== undefined) {
+          reconstructedText += checkWidth(array[j][i])
+            ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
+            : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
+        }
+      }
+      reconstructedText += "\\n";
+    }
   }
   return reconstructedText;
 }
-function reconstructForText(array, spaces) {
+
+function reconstructForText(array, spaces, direction) {
   let reconstructedText = "";
-  for (let i = 0; i < array[0].length; i++) {
-    for (let j = array.length - 1; j >= 0; j--) {
-      if (array[j][i] !== undefined) {
-        reconstructedText += checkWidth(array[j][i])
-          ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
-          : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
+  if (direction === "rtl") {
+    for (let i = 0; i < array[0].length; i++) {
+      for (let j = array.length - 1; j >= 0; j--) {
+        if (array[j][i] !== undefined) {
+          reconstructedText += checkWidth(array[j][i])
+            ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
+            : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
+        }
       }
+      reconstructedText += "\n";
     }
-    reconstructedText += "\n";
+  } else {
+    for (let i = 0; i < array[0].length; i++) {
+      for (let j = 0; j < array.length; j++) {
+        if (array[j][i] !== undefined) {
+          reconstructedText += checkWidth(array[j][i])
+            ? `${array[j][i]}${spaces != 0 ? ' '.repeat(spaces) : ''}`
+            : `${array[j][i]} ${spaces != 0 ? ' '.repeat(spaces) : ''}`;
+        }
+      }
+      reconstructedText += "\n";
+    }
   }
   return reconstructedText;
 }
+
 function checkWidth(char) {
   return char.match(/^[^\x01-\x7E\uFF61-\uFF9F]+$/);
 }
