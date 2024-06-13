@@ -44,9 +44,11 @@ function genScript() {
 
 function copyText() {
   var textArea = document.getElementById("output");
-  textArea.select();
-  document.execCommand("copy");
-  alert("クリップボードにコピーしました！");
+  navigator.clipboard.writeText(textArea.value).then(function() {
+    alert("クリップボードにコピーしました！");
+  }).catch(function(err) {
+    console.error("クリップボードへのコピーに失敗しました: ", err);
+  });
 }
 
 function tategaki(content, type) {
