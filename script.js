@@ -42,13 +42,10 @@ function genScript() {
   //copyToClipboard(content);
 }
 
-function copyToClipboard(content) {
-  const tempInput = document.createElement("input");
-  tempInput.value = content;
-  document.body.appendChild(tempInput);
-  tempInput.select();
+function copyText() {
+  var textArea = document.getElementById("output");
+  textArea.select();
   document.execCommand("copy");
-  document.body.removeChild(tempInput);
   alert("クリップボードにコピーしました！");
 }
 
