@@ -1,3 +1,5 @@
+document.getElementById("copyBtn").addEventListener("click", copyText);
+
 const replaceChars = {
   "ー": "｜",
   "（": "︵",
