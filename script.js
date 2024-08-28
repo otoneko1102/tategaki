@@ -1,5 +1,16 @@
 document.getElementById("copyBtn").addEventListener("click", copyText);
 
+document.addEventListener('DOMContentLoaded', function () {
+  const content = document.getElementById('content');
+  const charCount = document.getElementById('charCount');
+
+  function updateCharCount() {
+    charCount.textContent = content.value.length;
+  }
+
+  setInterval(updateCharCount, 300);
+});
+
 const replaceChars = {
   "ー": "｜",
   "（": "︵",
