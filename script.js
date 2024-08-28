@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
     charCount.textContent = content.value.length;
   }
 
-  setInterval(updateCharCount, 300);
+  content.addEventListener('input', updateCharCount);
+
+  updateCharCount();
 });
 
 const replaceChars = {
