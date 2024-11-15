@@ -1,54 +1,25 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="横書きの文章を擬似的に縦書きに変換します。">
-  <meta property="og:title" content="tategaki">
-  <meta property="og:description" content="横書きの文章を擬似的に縦書きに変換します。">
-  <meta property="og:url" content="https://tategaki.otoneko.jp/">
-  <meta property="og:image" content="https://tategaki.otoneko.jp/img/icon.jpg">
-  <title>縦書き変換</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="shortcut icon" href="img/icon.jpg">
-  <link rel="apple-touch-icon" sizes="2048x2048" href="img/icon.jpg">
-  <link rel="icon" type="image/jpeg" href="img/icon.jpg">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="横書きの文章を擬似的に縦書きに変換します。">
+    <meta property="og:title" content="tategaki">
+    <meta property="og:description" content="横書きの文章を擬似的に縦書きに変換します。">
+    <meta property="og:url" content="https://tategaki.otoneko.jp/">
+    <meta property="og:image" content="https://tategaki.otoneko.jp/img/icon.jpg">
 
-  <h1>縦書き変換</h1>
+    <!-- New Page -->
+    <meta http-equiv="refresh" content="0;url=https://www.projectarchive.cloud/main/tategaki/">
 
-  <form>
-    <label for="count">改行文字数(0で無効):</label>
-    <input type="number" id="count" name="count" value="0" min="0" step="1">
-    <label for="spaces">文字間隔調整(0で無効):</label>
-    <input type="number" id="spaces" name="spaces" value="0" min="0" step="1">
-    <label for="direction">方向:</label>
-    <select id="direction" name="direction">
-      <option value="rtl">右から左</option>
-      <option value="ltr">左から右</option>
-    </select>
-    <label for="charCount">文字数:</label>
-    <div id="charCount">0</div>
-    <label for="content">Content:</label>
-    <textarea id="content" rows="5" name="content" required></textarea><br>
-    <button type="button" class="gen" onclick="genText()">Convert for Text</button>
-    <button type="button" class="gen" onclick="genHTML()">Convert for HTML</button>
-    <button type="button" class="gen" onclick="genScript()">Convert for Script</button>
-  </form>
-
-  <div>
-    <button type="button" class="gen" id="copyBtn">Copy</button>
-    <textarea id="output" rows="20" readonly></textarea>
-  </div>
-
-  <a href="https://github.com/otoneko1102/tategaki/blob/main/README.md" target="_blank">Docs(Read Me)</a>
-  
-  <h3>Get Support</h3>
-  <a href="https://discord.gg/yKW8wWKCnS" target="_blank"><img src="https://discordapp.com/api/guilds/1005287561582878800/widget.png?style=banner2" alt="Discord Banner"/></a>
-  
-  <script src="script.js"></script>
-
-</body>
+    <title>縦書き変換</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" href="img/icon.jpg">
+    <link rel="apple-touch-icon" sizes="2048x2048" href="img/icon.jpg">
+    <link rel="icon" type="image/jpeg" href="img/icon.jpg">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <p>リダイレクトされない場合は、<a href="https://www.projectarchive.cloud/main/tategaki/">こちら</a>をクリックしてください。</p>
+  </body>
 </html>
